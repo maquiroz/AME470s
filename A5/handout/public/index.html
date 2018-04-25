@@ -81,7 +81,7 @@ body{
       width: 250px;
       min-height: 100%;
       background: gray;
-    }
+    } 
     #theInspector{
       float:right;
       width: 250px;
@@ -90,13 +90,13 @@ body{
       top: 0px;
     position: absolute;
     right: 0px;
-    }
+    } 
     #rssBox{
       float:left;
       width: 250px;
       min-height: 100%;
       background: lightgray;
-    }
+    } 
     #theDetails{
       width: calc(100% - 500px);
       min-height: 100%;
@@ -183,7 +183,7 @@ body{
     resetFilters();
     // Instead of the above resetFilters(), init the filters stored by user and apply it!
     document.getElementById("theDetails").style.backgroundImage = "url(" + imgURL + ")";
-
+   
     $("#theImageList .item").removeClass("active");
     $("#theImageList .item:nth-of-type(" + (n+1) + ")").addClass("active");
   }
@@ -209,7 +209,7 @@ body{
               markup += "</div>";
           }
           $("#theImageList").html(markup);
-        }
+        }     
         ac.hide();
     });
   }

@@ -57,13 +57,13 @@
       width: 250px;
       min-height: 100%;
       background: gray;
-    } 
+    }
     #rssBox{
       float:left;
       width: 250px;
       min-height: 100%;
       background: lightgray;
-    } 
+    }
     #theDetails{
       float:right;
       width: calc(100% - 250px);
@@ -139,18 +139,18 @@
     })
   }
 
-  function imgSelection(n)
+  function imgSelected(n)
   {
-	  var currName = currRSSFeedList[n].name;
-	  var id = currRSSFeedList[n].id;
-	  var imgURL = currRSSFeedList[n].url;
-	  alert(imgURL);
-	  $("#theDetails").html("<img src=\ '" + imgURL + "\ ' ></img");
+    var currName = currRSSFeedList[n].name;
+    var id = currRSSFeedList[n].id;
+    var imgURL = currRSSFeedList[n].url;
+    alert(imgURL);
+$("theDetails").html("<img src=\ '" + imgURL + "\'></img");
+
   }
 
   function start()
   {
-	  //debugger;
     ac.show();
     var url = "./getAllImgs";
     loadFile(url, function(resData){
@@ -170,13 +170,12 @@
               markup += "</div>";
           }
           $("#theImageList").html(markup);
-        }     
+        }
         ac.hide();
     });
   }
 
   function loadRSS(url){
-	  //debugger;
     console.log(url);
     loadFile(url, function(resData){
       currRSSData = JSON.parse(resData).feed.results;

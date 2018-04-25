@@ -63,8 +63,63 @@
     var url = "./getFeedData?url=" + feedURL;
     loadRSS(url);
   }
+
   function start()
   {
     var feedURL = window.location.hash.replace("#","");
     var url = "./getFeedData?url=" + feedURL;
     loadRSS(url);
+  }
+  function loadRSS(url){
+    console.log(url);
+    loadFile(url, function(resData){
+      currRSSData = JSON.parse(resData).feed.results;
+      //var markup = resData;
+      var markup = "";
+      for(var i = 0; i < currRSSData.length; i++){
+        var entry = currRSSData[i];
+        var thumb = entry.artworkUrl100;
+        var name = entry.name;
+        var artist = entry.artistName;
+        var release = entry.releaseDate;
+
+        markup += "<button onclick='itemSelected(" + i + ")'><img src='" + thumb + "'><h1>" + name+ "</h1><h2>" + artist + "<h2><h2>" + release + "<h2></button>";
+      }
+      $("#theList").html(markup);
+    });
+  }
+  function itemSelected(n)
+  {
+    var data = currRSSData[n];
+    var markup = "";
+    var thumbnail = data.artworkUrl100 || "";
+    var name = data.name || "";
+    var link = data.url || "";
+    var link2 = data.artistUrl || "";
+    var artist = data.artistName || "";
+    var release = data.releaseDate || "";
+    var copy = data.copyright || "";
+
+    console.log(data);
+    markup += "<img src='" + thumbnail + "'>";
+    markup += "<a target='_blank' href='" + link + "'><h1>" + name + "</h1></a>";
+    markup += "<a target='_blank' href='" + link2 + "'><h2>" + artist + "</h2></a>";
+    markup += "<h2>" + release + "</h2>"
+    markup += "<h2>" + copy + "</h2>"
+    $("#theDetails").html(markup);
+    //document.getElementById("theDetails").innerHTML = markup;
+  }
+  </script>
+
+</head>
+
+<body onload='start()'>
+<div id='rssBox'>
+	<h1> RSS Reader </h1>
+  <button id='editButton' onclick='changeRSSSrc()'> Edit </button>
+  <div id='theList'></div>
+</div>
+<div id='theDetails'></div>
+
+</body>
+</html>
