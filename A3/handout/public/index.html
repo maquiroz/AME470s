@@ -1,0 +1,70 @@
+<html>
+<head>
+  <script src='asyncReq.js'></script>
+  <script src='jquery-3.3.1.min.js'></script>
+  <style>
+  #theList button{
+      border: 0px;
+      padding: 0px;
+      min-width: 100%;
+      box-shadow: 0px 0px 1px;
+  }
+  #theList button h1,
+  #theList button h2
+  {
+    padding: 0px;
+    margin: 0px;
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  #theList button h2
+  {
+    font-size: 15px;
+  }
+  #theList button img{
+      height: 100px;
+      width: 100px;
+      float: left;
+      margin-right: 5px;
+  }
+    #editButton{
+      float: right;
+      margin-top: -50px;
+      margin-right: 5px;
+    }
+    #rssBox{
+      float:left;
+      width: 250px;
+      min-height: 100%;
+      background: lightgray;
+    }
+    #theDetails{
+      float:right;
+      width: calc(100% - 250px);
+      min-height: 100%;
+      background: lightgray;
+      text-align:center;
+    }
+  </style>
+  <script>
+  function getDataFromServer(){
+    //var url = "./eval?eq=34-4*45";
+    var url = "https://rss.itunes.apple.com/api/v1/us/apple-music/hot-tracks/all/10/explicit.json";
+    loadFile(url, function(resData){
+      $("#result").val(resData);
+    });
+  }
+  var currRSSData = null;
+  function changeRSSSrc()
+  {
+    var feedURL = prompt("Enter your RSS feed URL:");
+    var url = "./getFeedData?url=" + feedURL;
+    loadRSS(url);
+  }
+  function start()
+  {
+    var feedURL = window.location.hash.replace("#","");
+    var url = "./getFeedData?url=" + feedURL;
+    loadRSS(url);
